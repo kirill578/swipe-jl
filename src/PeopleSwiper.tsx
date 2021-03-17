@@ -74,7 +74,7 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
                   key={person.id}
                   preventSwipe={["up", "down"]}
                   onSwipe={(direction) =>
-                    onSelect(person, direction === "left")
+                    onSelect(person, direction === "right")
                   }
                   onCardLeftScreen={() => {
                     setCounter((x) => x + 1);
