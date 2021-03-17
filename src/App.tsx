@@ -4,7 +4,7 @@ import { Box } from "@material-ui/core";
 import { Person, usePeople, useVote } from './useApi';
 import { PeopleSwiper } from './PeopleSwiper';
 
-const Table = ({ people } : {people: Person[]}) => <Box marginTop="250px" display="flex" flexDirection="column" alignItems="center">
+const Table = ({ people } : {people: Person[]}) => <Box marginTop="5px" display="flex" flexDirection="column" alignItems="center">
 {people.map(person => (<Box  key={person.id} display="flex" flexDirection="row" marginTop="5px">
   <Box>{person.y} = 🦎</Box>
   <Box width="20px"/>
@@ -33,7 +33,7 @@ export const App = () => {
   }
 
   return (
-    <Box position="relative" width="100%" height="100%" p="10px">
+    <Box position="absolute" width="100%" height="100%">
       {isLoading && <Box>Loading</Box>}
       {isError && <Box>error</Box>}
       {people && <PeopleSwiper people={people} onSelect={onVote}/>}
