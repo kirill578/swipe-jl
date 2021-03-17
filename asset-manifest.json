@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/swipe-jl/static/css/main.50e0d94b.chunk.css",
-    "main.js": "/swipe-jl/static/js/main.ff4958e5.chunk.js",
-    "main.js.map": "/swipe-jl/static/js/main.ff4958e5.chunk.js.map",
-    "runtime-main.js": "/swipe-jl/static/js/runtime-main.de509387.js",
-    "runtime-main.js.map": "/swipe-jl/static/js/runtime-main.de509387.js.map",
-    "static/js/2.6e28711d.chunk.js": "/swipe-jl/static/js/2.6e28711d.chunk.js",
-    "static/js/2.6e28711d.chunk.js.map": "/swipe-jl/static/js/2.6e28711d.chunk.js.map",
-    "index.html": "/swipe-jl/index.html",
-    "precache-manifest.03183b1032a0bc65bca10914c03d1f10.js": "/swipe-jl/precache-manifest.03183b1032a0bc65bca10914c03d1f10.js",
-    "service-worker.js": "/swipe-jl/service-worker.js",
-    "static/css/main.50e0d94b.chunk.css.map": "/swipe-jl/static/css/main.50e0d94b.chunk.css.map"
+    "main.css": "/static/css/main.50e0d94b.chunk.css",
+    "main.js": "/static/js/main.a5987994.chunk.js",
+    "main.js.map": "/static/js/main.a5987994.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.d54b910c.js",
+    "runtime-main.js.map": "/static/js/runtime-main.d54b910c.js.map",
+    "static/js/2.6e28711d.chunk.js": "/static/js/2.6e28711d.chunk.js",
+    "static/js/2.6e28711d.chunk.js.map": "/static/js/2.6e28711d.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.4465b70ac3a59c4aae84f60e319e500f.js": "/precache-manifest.4465b70ac3a59c4aae84f60e319e500f.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.50e0d94b.chunk.css.map": "/static/css/main.50e0d94b.chunk.css.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.de509387.js",
+    "static/js/runtime-main.d54b910c.js",
     "static/js/2.6e28711d.chunk.js",
     "static/css/main.50e0d94b.chunk.css",
-    "static/js/main.ff4958e5.chunk.js"
+    "static/js/main.a5987994.chunk.js"
   ]
 }
