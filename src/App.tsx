@@ -3,16 +3,32 @@ import React from "react";
 import { Box } from "@material-ui/core";
 import { Person, usePeople, useVote } from './useApi';
 import { PeopleSwiper } from './PeopleSwiper';
+import { LinearProgress } from '@material-ui/core';
 
-const Table = ({ people } : {people: Person[]}) => <Box marginTop="5px" display="flex" flexDirection="column" alignItems="center">
-{people.map(person => (<Box  key={person.id} display="flex" flexDirection="row" marginTop="5px">
-  <Box>{person.y} = 🦎</Box>
-  <Box width="20px"/>
-  <Box>{person.n} = ✨</Box>
-  <Box width="20px"/>
-  <Box>{person.name}</Box>
-</Box>))}
-</Box>
+const Table = ({ people } : {people: Person[]}) => {
+  return (
+    <Box marginTop="5px" display="flex" flexDirection="column" alignItems="center">
+    {people.map(person => {
+      const score = person.n + person.y === 0 ? 0 : person.y / (person.n + person.y);
+      return (
+        <Box key={person.id} display="flex" flexDirection="row" marginTop="5px">
+          <Box marginTop="10px">✨</Box>
+          <Box width="4px" />
+          <Box  key={person.id} display="flex" flexDirection="column" marginTop="5px">
+          <Box textAlign="center">{person.name}</Box>
+            <Box width="200px" height="15px" marginTop="3px">
+              <LinearProgress variant="determinate" value={score*100} />
+            </Box>
+          </Box>
+          <Box width="4px" />
+          <Box marginTop="10px">🦎</Box>
+        </Box>  
+      
+      );
+    })}
+    </Box>
+  );
+}
 
 export const App = () => {
   const { people, isError, isLoading } = usePeople();
