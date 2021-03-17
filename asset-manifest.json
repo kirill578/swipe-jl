@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/swipe-jl/static/css/main.34de6062.chunk.css",
+    "main.js": "/swipe-jl/static/js/main.636d76ce.chunk.js",
+    "main.js.map": "/swipe-jl/static/js/main.636d76ce.chunk.js.map",
+    "runtime-main.js": "/swipe-jl/static/js/runtime-main.de509387.js",
+    "runtime-main.js.map": "/swipe-jl/static/js/runtime-main.de509387.js.map",
+    "static/js/2.4a1b4e6d.chunk.js": "/swipe-jl/static/js/2.4a1b4e6d.chunk.js",
+    "static/js/2.4a1b4e6d.chunk.js.map": "/swipe-jl/static/js/2.4a1b4e6d.chunk.js.map",
+    "index.html": "/swipe-jl/index.html",
+    "precache-manifest.accdbbda3ea8f7376ca92992c2190413.js": "/swipe-jl/precache-manifest.accdbbda3ea8f7376ca92992c2190413.js",
+    "service-worker.js": "/swipe-jl/service-worker.js",
+    "static/css/main.34de6062.chunk.css.map": "/swipe-jl/static/css/main.34de6062.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.de509387.js",
+    "static/js/2.4a1b4e6d.chunk.js",
+    "static/css/main.34de6062.chunk.css",
+    "static/js/main.636d76ce.chunk.js"
+  ]
+}
