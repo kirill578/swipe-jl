@@ -52,7 +52,7 @@ export const usePeople = () => {
 
 export const useVote = () => {
     return {
-      voteYes: (id: string) => fetch(host + "/api/v1/lj/vote_y/" + id),
-      voteNo: (id: string) => fetch(host + "/api/v1/lj/vote_n/" + id),
+      voteYes: async (id: string): Promise<Person> => await (await fetch(host + "/api/v1/lj/vote_y/" + id)).json(),
+      voteNo: async (id: string): Promise<Person> => await (await fetch(host + "/api/v1/lj/vote_n/" + id)).json(),
     }
 };

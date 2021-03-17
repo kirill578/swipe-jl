@@ -21,7 +21,9 @@ export const App = () => {
   const [voted, setVoted] = React.useState<Person[]>([]);
 
   const onVote = (person: Person, yes: boolean) => {
-    yes ? voteYes(person.id) : voteNo(person.id);
+    (yes ? voteYes : voteNo)(person.id).then((updated: Person) => {
+      setVoted(list => list.map((person: Person) => person.id === updated.id ? updated : person));
+    });
     setVoted(x => [{
       ...person,
       y: person.y + (yes ? 1 : 0),
