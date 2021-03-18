@@ -107,6 +107,8 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
       <Box alignSelf="stretch" display="flex" flexDirection="row" paddingTop="120px" marginX="10px" justifyContent="center">
         <Button style={{flex: 1, background: '#5b9bbd', maxWidth: 100, fontSize: 40}} onClick={() => childRefs[counter].current.swipe('left')}>{negativeIcon}</Button>
         <Box width="25px" />
+        <Button style={{flex: 1, background: '#5b9bbd', maxWidth: 100, fontSize: 40}} onClick={() => {window.location.href = 'https://wa.me/?text='+encodeURIComponent(window.location.href)}}><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="35px" height="35px" /></Button>
+        <Box width="25px" />
         <Button style={{flex: 1, background: '#5b9bbd', maxWidth: 100, fontSize: 40}} onClick={() => childRefs[counter].current.swipe('right')}>{positiveIcon}</Button>
       </Box>
     </Box>
