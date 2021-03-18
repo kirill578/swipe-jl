@@ -88,7 +88,7 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
         <Box flex={3}>
           {people &&
             people
-              .slice(counter, counter + 2)
+              .slice(counter, counter + 3)
               .reverse()
               .map((person, index) => {
 
@@ -122,13 +122,13 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
       </Box>
       <Box paddingX="25px" width="80vw" maxWidth="300px" alignSelf="center" display="flex" flexDirection="row" marginTop="-30px" justifyContent="space-between">
         <Box>
-          <Fab style={{background: '#5b9bbd', fontSize: 40}} onClick={() => childRefs[counter].current.swipe('left')}>{negativeIcon}</Fab>
+          <Fab style={{background: '#5b9bbd', fontSize: 35}} onClick={() => childRefs[counter].current.swipe('left')}>{negativeIcon}</Fab>
         </Box>
         <Box>
         <Fab style={{background: '#5b9bbd', fontSize: 40}} onClick={() => {window.location.href = 'https://wa.me/?text='+encodeURIComponent(window.location.href)}}><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="35px" height="35px" /></Fab>
         </Box>
         <Box>
-          <Fab style={{background: '#5b9bbd', fontSize: 40}} onClick={() => childRefs[counter].current.swipe('right')}>{positiveIcon}</Fab>
+          <Fab style={{background: '#5b9bbd', fontSize: 35}} onClick={() => childRefs[counter].current.swipe('right')}>{positiveIcon}</Fab>
         </Box>
       </Box>
     </Box>

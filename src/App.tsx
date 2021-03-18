@@ -89,8 +89,17 @@ export const App = () => {
       width="100%"
       minHeight="100%"
       style={{ background: "#dbe9f0" }}
-      borderTop="10px solid #5b9bbd"
+      display="flex"
+      flexDirection="column"
     >
+      <Box 
+        height="15px"
+        justifySelf="stretch"
+        style={{ background:"#5b9bbd" }}
+      />
+      <Box 
+        height="10px"
+      />
       <Box
         width="100%"
         height="100%"
@@ -105,8 +114,15 @@ export const App = () => {
         {isLoading && <Box>Loading</Box>}
         {isError && <Box>error</Box>}
         {people && <PeopleSwiper people={people} onSelect={onVote} />}
-        <Table people={voted} />
       </Box>
+      <Box 
+        height="50px"
+      />
+      <Box 
+        flex={1}
+        justifySelf="stretch"
+        style={{ background:"#5b9bbd" }}
+      />
     </Box>
   );
 };
