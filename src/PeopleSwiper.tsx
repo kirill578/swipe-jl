@@ -102,9 +102,9 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
         </Box>
       </Box>
       <Box alignSelf="stretch" display="flex" flexDirection="row" paddingTop="120px" marginX="10px" justifyContent="center">
-        <Button style={{flex: 1, maxWidth: 100, fontSize: 40}} variant="outlined" onClick={() => childRefs[counter].current.swipe('left')}>✨</Button>
+        <Button style={{flex: 1, background: 'rgba(255,255,255,0.3)', maxWidth: 100, fontSize: 40}} variant="outlined" onClick={() => childRefs[counter].current.swipe('left')}>✨</Button>
         <Box width="25px" />
-        <Button style={{flex: 1, maxWidth: 100, fontSize: 40}} variant="outlined" onClick={() => childRefs[counter].current.swipe('right')}>🦎</Button>
+        <Button style={{flex: 1, background: 'rgba(255,255,255,0.3)', maxWidth: 100, fontSize: 40}} variant="outlined" onClick={() => childRefs[counter].current.swipe('right')}>🦎</Button>
       </Box>
     </Box>
   );
