@@ -4,6 +4,7 @@ import { Box } from "@material-ui/core";
 import { Person, usePeople, useVote } from "./useApi";
 import { PeopleSwiper } from "./PeopleSwiper";
 import { LinearProgress } from "@material-ui/core";
+import { negativeIcon, positiveIcon } from './emoji';
 
 const Table = ({ people }: { people: Person[] }) => {
   return (
@@ -23,7 +24,7 @@ const Table = ({ people }: { people: Person[] }) => {
             flexDirection="row"
             marginTop="5px"
           >
-            <Box marginTop="10px">✨</Box>
+            <Box marginTop="10px">{negativeIcon}</Box>
             <Box width="4px" />
             <Box
               key={person.id}
@@ -37,7 +38,7 @@ const Table = ({ people }: { people: Person[] }) => {
               </Box>
             </Box>
             <Box width="4px" />
-            <Box marginTop="10px">🦎</Box>
+            <Box marginTop="10px">{positiveIcon}</Box>
           </Box>
         );
       })}

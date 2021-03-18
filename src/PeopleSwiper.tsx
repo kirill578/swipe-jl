@@ -3,6 +3,7 @@ import React from "react";
 import { Box, Button } from "@material-ui/core";
 import TinderCard from "react-tinder-card";
 import { Person } from "./useApi";
+import { negativeIcon, positiveIcon } from './emoji';
 
 const PersonItem = (props: Person) => (
   <Box
@@ -57,7 +58,7 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
             textAlign: "right",
           }}
         >
-          ✨
+          {negativeIcon}
         </Box>
         <Box flex={3}>
           {people &&
@@ -98,13 +99,13 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
             textAlign: "left",
           }}
         >
-          🦎
+          {positiveIcon}
         </Box>
       </Box>
       <Box alignSelf="stretch" display="flex" flexDirection="row" paddingTop="120px" marginX="10px" justifyContent="center">
-        <Button style={{flex: 1, background: 'rgba(255,255,255,0.3)', maxWidth: 100, fontSize: 40}} variant="outlined" onClick={() => childRefs[counter].current.swipe('left')}>✨</Button>
+        <Button style={{flex: 1, background: 'rgba(255,255,255,0.3)', maxWidth: 100, fontSize: 40}} variant="outlined" onClick={() => childRefs[counter].current.swipe('left')}>{negativeIcon}</Button>
         <Box width="25px" />
-        <Button style={{flex: 1, background: 'rgba(255,255,255,0.3)', maxWidth: 100, fontSize: 40}} variant="outlined" onClick={() => childRefs[counter].current.swipe('right')}>🦎</Button>
+        <Button style={{flex: 1, background: 'rgba(255,255,255,0.3)', maxWidth: 100, fontSize: 40}} variant="outlined" onClick={() => childRefs[counter].current.swipe('right')}>{positiveIcon}</Button>
       </Box>
     </Box>
   );
