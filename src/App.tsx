@@ -88,18 +88,17 @@ export const App = () => {
       position="absolute"
       width="100%"
       minHeight="100%"
-      style={{ background: "#b8cff5" }}
+      style={{ background: "#dbe9f0" }}
+      borderTop="10px solid #5b9bbd"
     >
       <Box
         width="100%"
         height="100%"
         style={{
           position: 'absolute',
-          background:
-            "url(https://upload.wikimedia.org/wikipedia/commons/4/49/Star_of_David.svg)",
-          backgroundSize: "20px 20px",
+          backgroundSize: "80px 100px",
           backgroundRepeat: "repeat",
-          opacity: 0.03,
+          opacity: 0.1,
         }}
       />
       <Box display="flex" flexDirection="column">

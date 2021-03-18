@@ -8,9 +8,9 @@ import { negativeIcon, positiveIcon } from './emoji';
 const PersonItem = (props: Person) => (
   <Box
     position="relative"
-    width="80vw"
-    maxWidth="260px"
-    height="300px"
+    width="90vw"
+    maxWidth="460px"
+    height="500px"
     boxShadow="0px 0px 60px 0px rgba(0,0,0,0.30)"
     borderRadius={20}
     style={{
@@ -25,7 +25,8 @@ const PersonItem = (props: Person) => (
     <Box
       p="10px"
       style={{
-        background: "white",
+        color: 'white',
+        background: "rgba(0,0,0, 0.5)",
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
       }}
@@ -50,6 +51,7 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
     <Box display="flex" flexDirection="column" paddingTop="20px">
       <Box display="flex" flexDirection="row">
         <Box
+          height="320px"
           flex={1}
           paddingTop="70px"
           style={{
@@ -103,9 +105,9 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
         </Box>
       </Box>
       <Box alignSelf="stretch" display="flex" flexDirection="row" paddingTop="120px" marginX="10px" justifyContent="center">
-        <Button style={{flex: 1, background: 'rgba(255,255,255,0.3)', maxWidth: 100, fontSize: 40}} variant="outlined" onClick={() => childRefs[counter].current.swipe('left')}>{negativeIcon}</Button>
+        <Button style={{flex: 1, background: '#5b9bbd', maxWidth: 100, fontSize: 40}} onClick={() => childRefs[counter].current.swipe('left')}>{negativeIcon}</Button>
         <Box width="25px" />
-        <Button style={{flex: 1, background: 'rgba(255,255,255,0.3)', maxWidth: 100, fontSize: 40}} variant="outlined" onClick={() => childRefs[counter].current.swipe('right')}>{positiveIcon}</Button>
+        <Button style={{flex: 1, background: '#5b9bbd', maxWidth: 100, fontSize: 40}} onClick={() => childRefs[counter].current.swipe('right')}>{positiveIcon}</Button>
       </Box>
     </Box>
   );
