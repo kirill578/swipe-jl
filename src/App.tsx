@@ -3,6 +3,7 @@ import React from "react";
 import { Box } from "@material-ui/core";
 import { Person, usePeople, useVote } from "./useApi";
 import { PeopleSwiper } from "./PeopleSwiper";
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { LinearProgress } from "@material-ui/core";
 import { negativeIcon, positiveIcon } from './emoji';
 
@@ -111,7 +112,7 @@ export const App = () => {
         }}
       />
       <Box display="flex" flexDirection="column">
-        {isLoading && <Box>Loading</Box>}
+        {isLoading && <Box paddingTop="30px" alignSelf="center"><CircularProgress /></Box>}
         {isError && <Box>error</Box>}
         {people && <PeopleSwiper people={people} onSelect={onVote} />}
       </Box>
