@@ -46,10 +46,21 @@ const Table = ({ people }: { people: Person[] }) => {
 };
 
 export const App = () => {
-  const { people, isError, isLoading } = usePeople();
+  const { people: peopleLoaded, isError, isLoading } = usePeople();
   // todo filter who you already voted for
   const { voteYes, voteNo } = useVote();
   const [voted, setVoted] = React.useState<Person[]>([]);
+
+
+  const [people, setPeople] = React.useState<Person[] | undefined>(undefined);
+
+  React.useEffect(() => {
+    const pastVotes: string[] = JSON.parse(window.localStorage.votedIds || '[]');
+    if (peopleLoaded) {
+      setPeople(peopleLoaded.filter(({id}) => !pastVotes.includes(id)));
+      setVoted(peopleLoaded.filter(({id}) => pastVotes.includes(id)));
+    }
+  }, [peopleLoaded]);
 
   const onVote = (person: Person, yes: boolean) => {
     (yes ? voteYes : voteNo)(person.id).then((updated: Person) => {
@@ -58,6 +69,7 @@ export const App = () => {
           person.id === updated.id ? updated : person
         )
       );
+      window.localStorage.votedIds = JSON.stringify([person.id, ...(JSON.parse(window.localStorage.votedIds || '[]'))])
     });
     setVoted((x) => [
       {
