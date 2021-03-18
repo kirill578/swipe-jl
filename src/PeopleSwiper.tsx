@@ -3,6 +3,7 @@ import React from "react";
 import { Box, Button } from "@material-ui/core";
 import TinderCard from "react-tinder-card";
 import { Person } from "./useApi";
+import Fab from '@material-ui/core/Fab';
 import { negativeIcon, positiveIcon } from './emoji';
 
 const PersonItem = (props: Person) => (
@@ -14,26 +15,60 @@ const PersonItem = (props: Person) => (
     boxShadow="0px 0px 60px 0px rgba(0,0,0,0.30)"
     borderRadius={20}
     style={{
-      background: `url(${props.imgsrc})`,
       backgroundColor: "white",
       backgroundSize: "cover",
       backgroundPosition: "center",
     }}
     display="flex"
-    flexDirection="column-reverse"
+    flexDirection="column"
+    justifyContent="stretch"
   >
     <Box
-      p="10px"
+      position="relative"
+      borderRadius={20}
+      marginTop="16px"
+      marginLeft="16px"
+      marginRight="16px"
+      height={400}
       style={{
-        color: 'white',
-        background: "rgba(0,0,0, 0.5)",
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
+        background: `url(${props.imgsrc})`,
+        backgroundColor: "white",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+      display="flex"
+      flexDirection="column-reverse"
+    >
+      <Box
+        position="absolute"
+        bottom="20px"
+        left="20px"
+        borderRadius={20}
+        paddingX="20px"
+        paddingY="10px"
+        style={{
+          backgroundColor: "white",
+          color: 'rgb(91, 155, 189)',
+          fontWeight: 'bolder',
+          fontSize: '20px'
+        }}
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+      ><Box>{Math.floor(100 * (props.n + props.y === 0 ? 0 : props.y / (props.n + props.y)))}</Box><Box marginLeft="3px" marginRight="10px">%</Box><Box marginTop="2px">{positiveIcon}</Box></Box>
+    </Box>
+    <Box flex={1}></Box>
+    <Box
+      p="16px"
+      style={{
+        color: 'rgb(91, 155, 189)',
+        fontWeight: 'bolder',
       }}
     >
       <Box style={{ fontSize: "2em", textAlign: "right" }}>{props.name}</Box>
       <Box style={{ fontSize: "1em", textAlign: "right" }}>{props.party}</Box>
     </Box>
+    <Box height="25px" />
   </Box>
 );
 
@@ -49,68 +84,84 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
 
   return (
     <Box display="flex" flexDirection="column" paddingTop="20px">
-      <Box display="flex" flexDirection="row">
-        <Box
-          height="320px"
-          flex={1}
-          paddingTop="70px"
-          style={{
-            WebkitUserSelect: "none",
-            fontSize: "100px",
-            textAlign: "right",
-          }}
-        >
-          {negativeIcon}
-        </Box>
+      <Box display="flex" flexDirection="row" height="500px">
         <Box flex={3}>
           {people &&
             people
               .slice(counter, counter + 2)
               .reverse()
-              .map((person, index) => (
-                <Box
-                  key={person.id}
-                  position="absolute"
-                  left="50%"
-                  style={{
-                    WebkitUserSelect: "none",
-                    transform: "translateX(-50%)",
-                  }}
-                >
-                  <TinderCard
-                    ref={childRefs[counter + 1 - index]}
-                    flickOnSwipe={true}
+              .map((person, index) => {
+
+
+                return (
+                  <Box
                     key={person.id}
-                    preventSwipe={["up", "down"]}
-                    onCardLeftScreen={(direction) => {
-                      onSelect(person, direction === "right")
-                      setCounter((x) => x + 1);
+                    position="absolute"
+                    left="50%"
+                    style={{
+                      WebkitUserSelect: "none",
+                      transform: "translateX(-50%)",
                     }}
                   >
-                    <PersonItem {...person} />
-                  </TinderCard>
-                </Box>
-              ))}
-        </Box>
-        <Box
-          flex={1}
-          paddingTop="70px"
-          style={{
-            WebkitUserSelect: "none",
-            fontSize: "100px",
-            textAlign: "left",
-          }}
-        >
-          {positiveIcon}
+                    <TinderCard
+                      ref={childRefs[counter + 1 - index]}
+                      flickOnSwipe={true}
+                      key={person.id}
+                      preventSwipe={["up", "down"]}
+                      onCardLeftScreen={(direction) => {
+                        onSelect(person, direction === "right")
+                        setCounter((x) => x + 1);
+                      }}
+                    >
+                      <PersonItem {...person} />
+                    </TinderCard>
+                  </Box>
+                );
+              })}
         </Box>
       </Box>
-      <Box alignSelf="stretch" display="flex" flexDirection="row" paddingTop="120px" marginX="10px" justifyContent="center">
-        <Button style={{flex: 1, background: '#5b9bbd', maxWidth: 100, fontSize: 40}} onClick={() => childRefs[counter].current.swipe('left')}>{negativeIcon}</Button>
-        <Box width="25px" />
-        <Button style={{flex: 1, background: '#5b9bbd', maxWidth: 100, fontSize: 40}} onClick={() => {window.location.href = 'https://wa.me/?text='+encodeURIComponent(window.location.href)}}><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="35px" height="35px" /></Button>
-        <Box width="25px" />
-        <Button style={{flex: 1, background: '#5b9bbd', maxWidth: 100, fontSize: 40}} onClick={() => childRefs[counter].current.swipe('right')}>{positiveIcon}</Button>
+      <Box paddingX="25px" width="80vw" maxWidth="300px" alignSelf="center" display="flex" flexDirection="row" marginTop="-30px" justifyContent="space-between">
+        <Box>
+          <Fab style={{background: '#5b9bbd', fontSize: 40}} onClick={() => childRefs[counter].current.swipe('left')}>{negativeIcon}</Fab>
+        </Box>
+        <Box>
+        <Fab style={{background: '#5b9bbd', fontSize: 40}} onClick={() => {window.location.href = 'https://wa.me/?text='+encodeURIComponent(window.location.href)}}><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="35px" height="35px" /></Fab>
+        </Box>
+        <Box>
+          <Fab style={{background: '#5b9bbd', fontSize: 40}} onClick={() => childRefs[counter].current.swipe('right')}>{positiveIcon}</Fab>
+        </Box>
       </Box>
     </Box>
   );
 };
+
+
+/*
+
+
+<Box
+                      position="absolute"
+                      style={{
+                        inset: 0,
+                        pointerEvents: 'none',
+                        fontSize: "250px",
+                        textAlign: "center",
+                        verticalAlign: "middle"
+                      }}
+                    >
+                      {positiveIcon}
+                    </Box>
+                    <Box
+                      position="absolute"
+                      style={{
+                        inset: 0,
+                        pointerEvents: 'none',
+                        fontSize: "250px",
+                        textAlign: "center",
+                        verticalAlign: "middle"
+                      }}
+                    >
+                      {negativeIcon}
+                    </Box>
+
+*/
