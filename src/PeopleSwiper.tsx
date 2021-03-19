@@ -78,6 +78,8 @@ type PeopleSwiperProps = {
   onSelect: (person: Person, b: boolean) => void;
 };
 
+const bufferSize = 3;
+
 export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
   const [counter, setCounter] = React.useState(0);
 
@@ -89,7 +91,7 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
         <Box flex={3}>
           {people &&
             people
-              .slice(counter, counter + 3)
+              .slice(counter, counter + bufferSize)
               .reverse()
               .map((person, index) => {
 
@@ -105,7 +107,7 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
                     }}
                   >
                     <TinderCard
-                      ref={childRefs[counter + 1 - index]}
+                      ref={childRefs[counter + bufferSize - 1 - index]}
                       flickOnSwipe={true}
                       key={person.id}
                       preventSwipe={["up", "down"]}
