@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React from "react";
-import { Box, Button } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import TinderCard from "react-tinder-card";
 import { Person } from "./useApi";
 import Fab from '@material-ui/core/Fab';
 import { negativeIcon, positiveIcon } from './emoji';
+import ShareIcon from '@material-ui/icons/Share';
 
 const PersonItem = (props: Person) => (
   <Box
@@ -125,7 +126,7 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
           <Fab style={{background: '#5b9bbd', fontSize: 35}} onClick={() => childRefs[counter].current.swipe('left')}>{negativeIcon}</Fab>
         </Box>
         <Box>
-        <Fab style={{background: '#5b9bbd', fontSize: 40}} onClick={() => {window.location.href = 'https://wa.me/?text='+encodeURIComponent(window.location.href)}}><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="35px" height="35px" /></Fab>
+        <Fab style={{background: '#5b9bbd', fontSize: 40, color: 'white'}} onClick={() => {window.location.href = 'https://wa.me/?text='+encodeURIComponent(window.location.href)}}><ShareIcon width="35px" height="35px" /></Fab>
         </Box>
         <Box>
           <Fab style={{background: '#5b9bbd', fontSize: 35}} onClick={() => childRefs[counter].current.swipe('right')}>{positiveIcon}</Fab>
@@ -134,34 +135,3 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
     </Box>
   );
 };
-
-
-/*
-
-
-<Box
-                      position="absolute"
-                      style={{
-                        inset: 0,
-                        pointerEvents: 'none',
-                        fontSize: "250px",
-                        textAlign: "center",
-                        verticalAlign: "middle"
-                      }}
-                    >
-                      {positiveIcon}
-                    </Box>
-                    <Box
-                      position="absolute"
-                      style={{
-                        inset: 0,
-                        pointerEvents: 'none',
-                        fontSize: "250px",
-                        textAlign: "center",
-                        verticalAlign: "middle"
-                      }}
-                    >
-                      {negativeIcon}
-                    </Box>
-
-*/

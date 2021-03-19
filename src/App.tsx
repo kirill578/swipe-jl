@@ -1,11 +1,26 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React from "react";
-import { Box } from "@material-ui/core";
+import { Box, Tab, Tabs, TextField } from "@material-ui/core";
 import { Person, usePeople, useVote } from "./useApi";
 import { PeopleSwiper } from "./PeopleSwiper";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { LinearProgress } from "@material-ui/core";
-import { negativeIcon, positiveIcon } from './emoji';
+import { negativeIcon, positiveIcon } from "./emoji";
+import SearchIcon from "@material-ui/icons/Search";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+
+const theme = createMuiTheme({
+  direction: 'rtl',
+  palette: {
+    primary: {
+      main: "#ffffff",
+    },
+    secondary: {
+      main: "#ffffff",
+    },
+  },
+});
 
 const Table = ({ people }: { people: Person[] }) => {
   return (
@@ -53,14 +68,26 @@ export const App = () => {
   const { voteYes, voteNo } = useVote();
   const [voted, setVoted] = React.useState<Person[]>([]);
 
+  const [tab, setTab] = React.useState(0);
+  const [searchText, setSearchText] = React.useState('');
+
+  const handleChange = (event: any, newValue: number) => {
+    setTab(newValue);
+  };
+
+  const handleTextChange = (event: any) => {
+    setSearchText(event.target.value);
+  };
 
   const [people, setPeople] = React.useState<Person[] | undefined>(undefined);
 
   React.useEffect(() => {
-    const pastVotes: string[] = JSON.parse(window.localStorage.votedIds || '[]');
+    const pastVotes: string[] = JSON.parse(
+      window.localStorage.votedIds || "[]"
+    );
     if (peopleLoaded) {
-      setPeople(peopleLoaded.filter(({id}) => !pastVotes.includes(id)));
-      setVoted(peopleLoaded.filter(({id}) => pastVotes.includes(id)));
+      setPeople(peopleLoaded.filter(({ id }) => !pastVotes.includes(id)));
+      setVoted(peopleLoaded.filter(({ id }) => pastVotes.includes(id)));
     }
   }, [peopleLoaded]);
 
@@ -71,7 +98,10 @@ export const App = () => {
           person.id === updated.id ? updated : person
         )
       );
-      window.localStorage.votedIds = JSON.stringify([person.id, ...(JSON.parse(window.localStorage.votedIds || '[]'))])
+      window.localStorage.votedIds = JSON.stringify([
+        person.id,
+        ...JSON.parse(window.localStorage.votedIds || "[]"),
+      ]);
     });
     setVoted((x) => [
       {
@@ -86,44 +116,63 @@ export const App = () => {
 
   return (
     <Box
+      display="flex"
       position="absolute"
+      flexDirection="column"
       width="100%"
       minHeight="100%"
-      style={{ background: "#dbe9f0" }}
-      display="flex"
-      flexDirection="column"
     >
-      <Box 
-        height="15px"
-        justifySelf="stretch"
-        style={{ background:"#5b9bbd" }}
-      />
-      <Box 
-        height="10px"
-      />
       <Box
-        width="100%"
-        height="100%"
-        style={{
-          position: 'absolute',
-          backgroundSize: "80px 100px",
-          backgroundRepeat: "repeat",
-          opacity: 0.1,
-        }}
-      />
-      <Box display="flex" flexDirection="column">
-        {isLoading && <Box paddingTop="30px" alignSelf="center"><CircularProgress /></Box>}
-        {isError && <Box>error</Box>}
-        {people && <PeopleSwiper people={people} onSelect={onVote} />}
-      </Box>
-      <Box 
-        height="50px"
-      />
-      <Box 
         flex={1}
+        style={{ background: "#dbe9f0" }}
+        display="flex"
+        flexDirection="column"
+      >
+        <Box
+          height={tab === 0 ? "15px" : undefined}
+          justifySelf="stretch"
+          style={{ background: "#5b9bbd" }}
+        >
+          {tab === 1 && <ThemeProvider theme={theme}>
+            <Box dir="rtl" color="white" display="flex" alignItems="stretch" justifyItems="stretch" flexDirection="column" p="10px">
+              <TextField id="standard-basic" onChange={handleTextChange} value={searchText} autoFocus />  
+            </Box>
+          </ThemeProvider>}
+        </Box>
+        <Box flex={1} display="flex" flexDirection="column" paddingTop="10px" style={{overflowY: 'scroll'}}>
+          {isLoading && (
+            <Box paddingTop="30px" alignSelf="center">
+              <CircularProgress />
+            </Box>
+          )}
+          {isError && <Box>error</Box>}
+          {people && tab === 0 && <PeopleSwiper people={people} onSelect={onVote} />}
+          {people && tab === 1 && <Table people={peopleLoaded!.filter(({name}) => name.includes(searchText.trim()))} />}
+        </Box>
+        <Box flex={1} />
+      </Box>
+      <Box
+        position="absolute"
+        bottom={0}
+        left={0}
+        right={0}
         justifySelf="stretch"
-        style={{ background:"#5b9bbd" }}
-      />
+        style={{ background: "#5b9bbd" }}
+      >
+        <ThemeProvider theme={theme}>
+          <Tabs
+            value={tab}
+            onChange={handleChange}
+            variant="fullWidth"
+            indicatorColor="primary"
+            textColor="primary"
+            aria-label="icon tabs example"
+          >
+            <Tab icon={<FavoriteIcon />} aria-label="favorite" />
+            <Tab icon={<SearchIcon />} aria-label="search" />
+          </Tabs>
+        </ThemeProvider>
+      </Box>
     </Box>
   );
 };
