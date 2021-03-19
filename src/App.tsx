@@ -25,10 +25,12 @@ const theme = createMuiTheme({
 const Table = ({ people }: { people: Person[] }) => {
   return (
     <Box
+      position="absolute"
       marginTop="5px"
       display="flex"
       flexDirection="column"
       alignItems="center"
+      style={{inset: 0}}
     >
       {people.map((person) => {
         const score =
@@ -139,7 +141,7 @@ export const App = () => {
             </Box>
           </ThemeProvider>}
         </Box>
-        <Box flex={1} display="flex" flexDirection="column" paddingTop="10px" style={{overflowY: 'scroll'}}>
+        <Box position="relative" flex={1} display="flex" flexDirection="column" paddingTop="10px" style={{overflowY: 'scroll'}}>
           {isLoading && (
             <Box paddingTop="30px" alignSelf="center">
               <CircularProgress />
@@ -149,7 +151,6 @@ export const App = () => {
           {people && tab === 0 && <PeopleSwiper people={people} onSelect={onVote} />}
           {people && tab === 1 && <Table people={peopleLoaded!.filter(({name}) => name.includes(searchText.trim()))} />}
         </Box>
-        <Box flex={1} />
       </Box>
       <Box
         position="absolute"
