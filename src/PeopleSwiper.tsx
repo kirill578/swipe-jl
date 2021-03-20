@@ -42,7 +42,7 @@ const PersonItem = (props: Person) => (
     >
       <Box
         position="absolute"
-        bottom="0px"
+        bottom="20px"
         left="20px"
         borderRadius={20}
         paddingX="20px"
