@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React from "react";
-import { Box, Tab, Tabs, TextField } from "@material-ui/core";
+import { Box, Tab, Tabs, TextField, Button } from "@material-ui/core";
 import { Person, usePeople, useVote } from "./useApi";
 import { PeopleSwiper } from "./PeopleSwiper";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { LinearProgress } from "@material-ui/core";
-import { negativeIcon, positiveIcon } from "./emoji";
+import { positiveIcon } from "./emoji";
 import SearchIcon from "@material-ui/icons/Search";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import SwipeableViews from 'react-swipeable-views';
 import Icon from './svgLogo';
@@ -24,42 +24,53 @@ const theme = createMuiTheme({
   },
 });
 
-const Table = ({ people }: { people: Person[] }) => {
+const Table = ({ people, onSelect }: { people: Person[], onSelect: (id: string) => void }) => {
   return (
     <Box
       position="relative"
       marginTop="5px"
       display="flex"
       flexDirection="column"
-      alignItems="center"
+      alignItems="stretch"
+      paddingTop="20px"
       style={{inset: 0}}
     >
       {people.map((person) => {
-        const score =
-          person.n + person.y === 0 ? 0 : person.y / (person.n + person.y);
+        const score = Math.floor(
+          person.n + person.y === 0 ? 0 : 100 * person.y / (person.n + person.y)
+        );
         return (
           <Box
-            key={person.id}
-            display="flex"
-            flexDirection="row"
-            marginTop="5px"
-          >
-            <Box marginTop="10px">{negativeIcon}</Box>
-            <Box width="4px" />
-            <Box
-              key={person.id}
-              display="flex"
-              flexDirection="column"
-              marginTop="5px"
-            >
-              <Box textAlign="center">{person.name}</Box>
-              <Box width="200px" height="15px" marginTop="3px">
-                <LinearProgress variant="determinate" value={score * 100} />
-              </Box>
-            </Box>
-            <Box width="4px" />
-            <Box marginTop="10px">{positiveIcon}</Box>
+          onClick={() => onSelect(person.id)}
+          key={person.id}
+          borderRadius={20}
+          marginBottom="20px"
+          marginX="20px"
+          paddingX="20px"
+          paddingY="10px"
+          style={{
+            backgroundColor: "white",
+            color: "rgb(91, 155, 189)",
+            fontWeight: "bolder",
+            fontSize: "20px",
+          }}
+          display="flex"
+          flexDirection="row"
+          alignItems="center"
+        >
+          <ChevronLeft />
+          <Box>
+            {score}
           </Box>
+          <Box marginLeft="3px" marginRight="10px">
+            %
+          </Box>
+          <Box marginTop="2px">{positiveIcon}</Box>
+          <Box flex={1} />
+          <Box marginLeft="3px" marginRight="10px">
+            {person.name}
+          </Box>
+        </Box>
         );
       })}
     </Box>
@@ -101,6 +112,7 @@ export const App = () => {
           all = all.reverse();
         }
       }
+      setTab(0);
       setPeople(all);
       setVoted(peopleLoaded.filter(({ id }) => pastVotes.includes(id)));
     }
@@ -163,7 +175,7 @@ export const App = () => {
         {isError && <Box>error</Box>}
         {people && <SwipeableViews containerStyle={{ height: '100%'}} index={tab} disabled={true}>
           <PeopleSwiper key={targetId} people={people} onSelect={onVote} />
-          <Table people={peopleLoaded!.filter(({name}) => name.includes(searchText.trim()))} />
+          <Table onSelect={(id) => setTargetId(id)} people={peopleLoaded!.filter(({name}) => name.includes(searchText.trim()))} />
         </SwipeableViews>}
       </Box>
       <Box
