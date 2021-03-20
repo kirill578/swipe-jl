@@ -12,7 +12,7 @@ const PersonItem = (props: Person) => (
     position="relative"
     width="90vw"
     maxWidth="460px"
-    height="500px"
+    height="calc(100vh - 185px)"
     boxShadow="0px 0px 60px 0px rgba(0,0,0,0.30)"
     borderRadius={20}
     style={{
@@ -30,7 +30,7 @@ const PersonItem = (props: Person) => (
       marginTop="16px"
       marginLeft="16px"
       marginRight="16px"
-      height={400}
+      height="100%"
       style={{
         background: `url(${props.imgsrc})`,
         backgroundColor: "white",
@@ -87,7 +87,7 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
 
   return (
     <Box flex="1" display="flex" flexDirection="column" paddingTop="20px">
-      <Box display="flex" flexDirection="row" height="500px">
+      <Box display="flex" flexDirection="row" height="calc(100vh - 185px)">
         <Box flex={3}>
           {people &&
             people
