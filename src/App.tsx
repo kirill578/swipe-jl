@@ -24,6 +24,10 @@ const theme = createMuiTheme({
   },
 });
 
+const scoreMe = (person: Person) =>  Math.floor(
+  person.n + person.y === 0 ? 0 : 100 * person.y / (person.n + person.y)
+);
+
 const Table = ({ people, onSelect }: { people: Person[], onSelect: (id: string) => void }) => {
   return (
     <Box
@@ -35,10 +39,8 @@ const Table = ({ people, onSelect }: { people: Person[], onSelect: (id: string) 
       paddingTop="20px"
       style={{inset: 0}}
     >
-      {people.map((person) => {
-        const score = Math.floor(
-          person.n + person.y === 0 ? 0 : 100 * person.y / (person.n + person.y)
-        );
+      {people.sort((a,b) => scoreMe(a) - scoreMe(b)).map((person) => {
+        const score = scoreMe(person);
         return (
           <Box
           onClick={() => onSelect(person.id)}
