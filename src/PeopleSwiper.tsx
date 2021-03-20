@@ -12,7 +12,7 @@ const PersonItem = (props: Person) => (
     position="relative"
     width="90vw"
     maxWidth="460px"
-    height="calc(100vh - 185px)"
+    height="calc(100vh - 210px)"
     boxShadow="0px 0px 60px 0px rgba(0,0,0,0.30)"
     borderRadius={20}
     style={{
@@ -103,7 +103,7 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
 
   return (
     <Box flex="1" display="flex" flexDirection="column" paddingTop="20px">
-      <Box display="flex" flexDirection="row" height="calc(100vh - 185px)">
+      <Box display="flex" flexDirection="row" height="calc(100vh - 210px)">
         <Box flex={3}>
           {people &&
             people
