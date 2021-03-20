@@ -146,7 +146,7 @@ export const App = () => {
       display="flex"
       position="absolute"
       flexDirection="column"
-      style={{ inset: 0, background: "#dbe9f0" }}
+      style={{ top: 0, bottom: 0, left: 0, right: 0, background: "#dbe9f0" }}
     >
       <Box
         height="60px"
@@ -173,7 +173,7 @@ export const App = () => {
           </Box>
         )}
         {isError && <Box>error</Box>}
-        {people && <SwipeableViews containerStyle={{ height: '100%'}} index={tab} disabled={true}>
+        {people && <SwipeableViews style={{flex: 1}} containerStyle={{ height: '100%'}} index={tab} disabled={true}>
           <PeopleSwiper key={targetId} people={people} onSelect={onVote} />
           <Table onSelect={(id) => setTargetId(id)} people={peopleLoaded!.filter(({name}) => name.includes(searchText.trim()))} />
         </SwipeableViews>}
