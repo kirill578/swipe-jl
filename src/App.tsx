@@ -9,6 +9,7 @@ import { negativeIcon, positiveIcon } from "./emoji";
 import SearchIcon from "@material-ui/icons/Search";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import SwipeableViews from 'react-swipeable-views';
 
 const theme = createMuiTheme({
   direction: 'rtl',
@@ -25,7 +26,7 @@ const theme = createMuiTheme({
 const Table = ({ people }: { people: Person[] }) => {
   return (
     <Box
-      position="absolute"
+      position="relative"
       marginTop="5px"
       display="flex"
       flexDirection="column"
@@ -121,42 +122,32 @@ export const App = () => {
       display="flex"
       position="absolute"
       flexDirection="column"
-      width="100%"
-      minHeight="100%"
+      style={{ inset: 0, background: "#dbe9f0" }}
     >
       <Box
-        flex={1}
-        style={{ background: "#dbe9f0" }}
-        display="flex"
-        flexDirection="column"
+        height={tab === 0 ? "15px" : undefined}
+        justifySelf="stretch"
+        style={{ background: "#5b9bbd" }}
       >
-        <Box
-          height={tab === 0 ? "15px" : undefined}
-          justifySelf="stretch"
-          style={{ background: "#5b9bbd" }}
-        >
-          {tab === 1 && <ThemeProvider theme={theme}>
-            <Box dir="rtl" color="white" display="flex" alignItems="stretch" justifyItems="stretch" flexDirection="column" p="10px">
-              <TextField id="standard-basic" onChange={handleTextChange} value={searchText} autoFocus />  
-            </Box>
-          </ThemeProvider>}
-        </Box>
-        <Box position="relative" flex={1} display="flex" flexDirection="column" paddingTop="10px" style={{overflowY: 'scroll'}}>
-          {isLoading && (
-            <Box paddingTop="30px" alignSelf="center">
-              <CircularProgress />
-            </Box>
-          )}
-          {isError && <Box>error</Box>}
-          {people && tab === 0 && <PeopleSwiper people={people} onSelect={onVote} />}
-          {people && tab === 1 && <Table people={peopleLoaded!.filter(({name}) => name.includes(searchText.trim()))} />}
-        </Box>
+        {tab === 1 && <ThemeProvider theme={theme}>
+          <Box dir="rtl" color="white" display="flex" alignItems="stretch" justifyItems="stretch" flexDirection="column" p="10px">
+            <TextField id="standard-basic" onChange={handleTextChange} value={searchText} autoFocus />  
+          </Box>
+        </ThemeProvider>}
+      </Box>
+      <Box position="relative" flex={1} display="flex" flexDirection="column" style={{overflowY: 'scroll'}}>
+        {isLoading && (
+          <Box paddingTop="30px" alignSelf="center">
+            <CircularProgress />
+          </Box>
+        )}
+        {isError && <Box>error</Box>}
+        {people && <SwipeableViews containerStyle={{ height: '100%'}} index={tab} disabled={true}>
+          <PeopleSwiper people={people} onSelect={onVote} />
+          <Table people={peopleLoaded!.filter(({name}) => name.includes(searchText.trim()))} />
+        </SwipeableViews>}
       </Box>
       <Box
-        position="absolute"
-        bottom={0}
-        left={0}
-        right={0}
         justifySelf="stretch"
         style={{ background: "#5b9bbd" }}
       >

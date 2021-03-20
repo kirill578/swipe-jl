@@ -86,7 +86,7 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
   const childRefs  = React.useMemo(() => Array(people.length).fill(0).map(i => React.createRef<any>()), [people.length])
 
   return (
-    <Box display="flex" flexDirection="column" paddingTop="20px">
+    <Box flex="1" display="flex" flexDirection="column" paddingTop="20px">
       <Box display="flex" flexDirection="row" height="500px">
         <Box flex={3}>
           {people &&
