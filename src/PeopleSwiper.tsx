@@ -3,9 +3,9 @@ import React from "react";
 import { Box } from "@material-ui/core";
 import TinderCard from "react-tinder-card";
 import { Person } from "./useApi";
-import Fab from '@material-ui/core/Fab';
-import { negativeIcon, positiveIcon } from './emoji';
-import ShareIcon from '@material-ui/icons/Share';
+import Fab from "@material-ui/core/Fab";
+import { negativeIcon, positiveIcon } from "./emoji";
+import ShareIcon from "@material-ui/icons/Share";
 
 const PersonItem = (props: Person) => (
   <Box
@@ -49,21 +49,31 @@ const PersonItem = (props: Person) => (
         paddingY="10px"
         style={{
           backgroundColor: "white",
-          color: 'rgb(91, 155, 189)',
-          fontWeight: 'bolder',
-          fontSize: '20px'
+          color: "rgb(91, 155, 189)",
+          fontWeight: "bolder",
+          fontSize: "20px",
         }}
         display="flex"
         flexDirection="row"
         alignItems="center"
-      ><Box>{Math.floor(100 * (props.n + props.y === 0 ? 0 : props.y / (props.n + props.y)))}</Box><Box marginLeft="3px" marginRight="10px">%</Box><Box marginTop="2px">{positiveIcon}</Box></Box>
+      >
+        <Box>
+          {Math.floor(
+            100 * (props.n + props.y === 0 ? 0 : props.y / (props.n + props.y))
+          )}
+        </Box>
+        <Box marginLeft="3px" marginRight="10px">
+          %
+        </Box>
+        <Box marginTop="2px">{positiveIcon}</Box>
+      </Box>
     </Box>
     <Box flex={1}></Box>
     <Box
       p="16px"
       style={{
-        color: 'rgb(91, 155, 189)',
-        fontWeight: 'bolder',
+        color: "rgb(91, 155, 189)",
+        fontWeight: "bolder",
       }}
     >
       <Box style={{ fontSize: "2em", textAlign: "right" }}>{props.name}</Box>
@@ -83,7 +93,13 @@ const bufferSize = 3;
 export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
   const [counter, setCounter] = React.useState(0);
 
-  const childRefs  = React.useMemo(() => Array(people.length).fill(0).map(i => React.createRef<any>()), [people.length])
+  const childRefs = React.useMemo(
+    () =>
+      Array(people.length)
+        .fill(0)
+        .map((i) => React.createRef<any>()),
+    [people.length]
+  );
 
   return (
     <Box flex="1" display="flex" flexDirection="column" paddingTop="20px">
@@ -94,8 +110,6 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
               .slice(counter, counter + bufferSize)
               .reverse()
               .map((person, index) => {
-
-
                 return (
                   <Box
                     key={person.id}
@@ -112,7 +126,7 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
                       key={person.id}
                       preventSwipe={["up", "down"]}
                       onCardLeftScreen={(direction) => {
-                        onSelect(person, direction === "right")
+                        onSelect(person, direction === "right");
                         setCounter((x) => x + 1);
                       }}
                     >
@@ -123,15 +137,45 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
               })}
         </Box>
       </Box>
-      <Box paddingX="25px" width="80vw" maxWidth="300px" alignSelf="center" display="flex" flexDirection="row" marginTop="-30px" justifyContent="space-between">
+      <Box
+        paddingX="25px"
+        width="80vw"
+        maxWidth="300px"
+        alignSelf="center"
+        display="flex"
+        flexDirection="row"
+        marginTop="-30px"
+        justifyContent="space-between"
+      >
         <Box>
-          <Fab style={{background: '#5b9bbd', fontSize: 35}} onClick={() => childRefs[counter].current.swipe('left')}>{negativeIcon}</Fab>
+          <Fab
+            style={{ background: "#5b9bbd", fontSize: 35 }}
+            onClick={() => childRefs[counter].current.swipe("left")}
+          >
+            {negativeIcon}
+          </Fab>
         </Box>
         <Box>
-        <Fab style={{background: '#5b9bbd', fontSize: 40, color: 'white'}} onClick={() => {window.location.href = 'https://wa.me/?text='+encodeURIComponent(window.location.href)}}><ShareIcon width="35px" height="35px" /></Fab>
+          <Fab
+            style={{ background: "#5b9bbd", fontSize: 40, color: "white" }}
+            onClick={() => {
+              window.open(
+                "https://wa.me/?text=" +
+                  encodeURIComponent(window.location.href),
+                "_blank"
+              );
+            }}
+          >
+            <ShareIcon width="35px" height="35px" />
+          </Fab>
         </Box>
         <Box>
-          <Fab style={{background: '#5b9bbd', fontSize: 35}} onClick={() => childRefs[counter].current.swipe('right')}>{positiveIcon}</Fab>
+          <Fab
+            style={{ background: "#5b9bbd", fontSize: 35 }}
+            onClick={() => childRefs[counter].current.swipe("right")}
+          >
+            {positiveIcon}
+          </Fab>
         </Box>
       </Box>
     </Box>
