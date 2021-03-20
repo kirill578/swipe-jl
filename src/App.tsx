@@ -10,6 +10,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import SwipeableViews from 'react-swipeable-views';
+import Icon from './svgLogo';
 
 const theme = createMuiTheme({
   direction: 'rtl',
@@ -125,13 +126,20 @@ export const App = () => {
       style={{ inset: 0, background: "#dbe9f0" }}
     >
       <Box
-        height={tab === 0 ? "15px" : undefined}
+        height="60px"
         justifySelf="stretch"
         style={{ background: "#5b9bbd" }}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
       >
+        {tab === 0 && <Icon />}
         {tab === 1 && <ThemeProvider theme={theme}>
-          <Box dir="rtl" color="white" display="flex" alignItems="stretch" justifyItems="stretch" flexDirection="column" p="10px">
-            <TextField id="standard-basic" onChange={handleTextChange} value={searchText} autoFocus />  
+          <Box alignSelf="stretch" dir="rtl" color="white" display="flex" alignItems="stretch" flexDirection="row" p="10px">
+            <SearchIcon />
+            <Box width="20px"></Box>
+            <TextField style={{flex: 1}} id="standard-basic" onChange={handleTextChange} value={searchText} autoFocus />  
           </Box>
         </ThemeProvider>}
       </Box>
