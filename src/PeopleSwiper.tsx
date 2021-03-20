@@ -126,7 +126,7 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
                       key={person.id}
                       preventSwipe={["up", "down"]}
                       onCardLeftScreen={(direction) => {
-                        onSelect(person, direction === "right");
+                        onSelect(person, direction === "left");
                         setCounter((x) => x + 1);
                       }}
                     >
@@ -152,7 +152,7 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
             style={{ background: "#5b9bbd", fontSize: 35 }}
             onClick={() => childRefs[counter].current.swipe("left")}
           >
-            {negativeIcon}
+            {positiveIcon}
           </Fab>
         </Box>
         <Box>
@@ -174,7 +174,7 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
             style={{ background: "#5b9bbd", fontSize: 35 }}
             onClick={() => childRefs[counter].current.swipe("right")}
           >
-            {positiveIcon}
+            {negativeIcon}
           </Fab>
         </Box>
       </Box>
