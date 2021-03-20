@@ -75,6 +75,9 @@ export const App = () => {
   const [tab, setTab] = React.useState(0);
   const [searchText, setSearchText] = React.useState('');
 
+  const idFromUrl = new URLSearchParams(window.location.search).get('id');
+  const [targetId, setTargetId] = React.useState<undefined | string>(idFromUrl !== null ? idFromUrl : undefined);
+
   const handleChange = (event: any, newValue: number) => {
     setTab(newValue);
   };
@@ -90,10 +93,18 @@ export const App = () => {
       window.localStorage.votedIds || "[]"
     );
     if (peopleLoaded) {
-      setPeople(peopleLoaded.filter(({ id }) => !pastVotes.includes(id)));
+      let all = peopleLoaded.filter(({ id }) => id !== targetId && !pastVotes.includes(id));
+      if(targetId) {
+        const targetPerson = peopleLoaded.find(({id}) => id === targetId);
+        if (targetPerson) {
+          all.push(targetPerson);
+          all = all.reverse();
+        }
+      }
+      setPeople(all);
       setVoted(peopleLoaded.filter(({ id }) => pastVotes.includes(id)));
     }
-  }, [peopleLoaded]);
+  }, [peopleLoaded, targetId]);
 
   const onVote = (person: Person, yes: boolean) => {
     (yes ? voteYes : voteNo)(person.id).then((updated: Person) => {
@@ -151,7 +162,7 @@ export const App = () => {
         )}
         {isError && <Box>error</Box>}
         {people && <SwipeableViews containerStyle={{ height: '100%'}} index={tab} disabled={true}>
-          <PeopleSwiper people={people} onSelect={onVote} />
+          <PeopleSwiper key={targetId} people={people} onSelect={onVote} />
           <Table people={peopleLoaded!.filter(({name}) => name.includes(searchText.trim()))} />
         </SwipeableViews>}
       </Box>

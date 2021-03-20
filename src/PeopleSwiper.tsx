@@ -161,7 +161,7 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
             onClick={() => {
               window.open(
                 "https://wa.me/?text=" +
-                  encodeURIComponent(window.location.href),
+                  encodeURIComponent(window.location.protocol + '//' + window.location.host + '?id=' + people[counter].id),
                 "_blank"
               );
             }}
