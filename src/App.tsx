@@ -37,7 +37,10 @@ const Table = ({ people, onSelect }: { people: Person[], onSelect: (id: string) 
       flexDirection="column"
       alignItems="stretch"
       paddingTop="20px"
-      style={{inset: 0}}
+      left={0}
+      right={0}
+      bottom={0}
+      top={0}
     >
       {people.sort((a,b) => scoreMe(a) - scoreMe(b)).map((person) => {
         const score = scoreMe(person);
@@ -146,7 +149,7 @@ export const App = () => {
   return (
     <Box
       display="flex"
-      position="absolute"
+      position="fixed"
       flexDirection="column"
       style={{ top: 0, bottom: 0, left: 0, right: 0, background: "#dbe9f0" }}
     >
@@ -194,7 +197,7 @@ export const App = () => {
             aria-label="icon tabs example"
           >
             <Tab icon={<FavoriteIcon />} aria-label="favorite" />
-            <Tab icon={<SearchIcon />} aria-label="search" />
+            <Tab id="searchtab" icon={<SearchIcon />} aria-label="search" />
           </Tabs>
         </ThemeProvider>
       </Box>

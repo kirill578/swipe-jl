@@ -5,7 +5,6 @@ import TinderCard from "react-tinder-card";
 import { Person } from "./useApi";
 import Fab from "@material-ui/core/Fab";
 import { negativeIcon, positiveIcon } from "./emoji";
-import ShareIcon from "@material-ui/icons/Share";
 
 const PersonItem = (props: Person) => (
   <Box
@@ -158,6 +157,7 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
         <Box>
           <Fab
             style={{ background: "#5b9bbd", fontSize: 40, color: "white" }}
+            id="sharebtn"
             onClick={() => {
               window.open(
                 "https://wa.me/?text=" +
@@ -166,7 +166,7 @@ export const PeopleSwiper = ({ people, onSelect }: PeopleSwiperProps) => {
               );
             }}
           >
-            <ShareIcon width="35px" height="35px" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="35px" height="35px" />
           </Fab>
         </Box>
         <Box>
